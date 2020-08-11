@@ -4,13 +4,14 @@ module.exports = {
 	mode: 'development',
 	entry: './client/index.js',
 	output: {
-		path: path.resolve(__dirname, 'build'),
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: '/',
 		filename: 'bundle.js',
 	},
 	module: {
 		rules: [
 			{
-				test: /\.jsx?/,
+				test: /.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
@@ -22,7 +23,8 @@ module.exports = {
 		],
 	},
 	devServer: {
-		publicPath: '/build/',
+		publicPath: '/',
+		contentBase: path.resolve(__dirname, 'client'),
 		hot: true,
 	}
 }
