@@ -15,9 +15,9 @@ module.exports = {
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
-					// options: {
-					// 	presets: ['@babel/preset-env', '@babel/preset-react'],
-					// }
+					options: {
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+					}
 				}
 			},
 			{
@@ -31,6 +31,9 @@ module.exports = {
 		publicPath: '/',
 		contentBase: path.resolve(__dirname, 'client'),
 		hot: true,
+		proxy: {
+			'/newText': 'http://localhost:3000',
+		}
 	},
 	resolve: {
     extensions: ['.js', '.jsx'],
