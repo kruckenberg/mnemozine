@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import AddText from './components/AddText.jsx';
+
+import './stylesheets/styles.css';
 
 const App = props => {
 	return (
-		<main>
-			<h1><strong>Hello, Handsome!</strong></h1>
-		</main>
-	)
+		<div>
+			<h2>Create a New Mnemo</h2>
+			<AddText />
+		</div>
+	);
 };
 
 export default App;
