@@ -33,6 +33,8 @@ module.exports = {
 		hot: true,
 		proxy: {
 			'/newText': 'http://localhost:3000',
+			'/login': 'http://localhost:3000',
+			'/signup': 'http://localhost:3000',
 		}
 	},
 	resolve: {

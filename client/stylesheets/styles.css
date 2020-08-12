@@ -21,14 +21,22 @@ img {
   width: 500px;
 }
 
-#addTextWrapper {
+#app {
+	width: 1200px;
+}
+
+#addTextWrapper,
+#getUserWrapper {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	padding: 50px;
 	background-color: rgba(220,220,220,0.8);
+	border-radius: 10px;
 	box-shadow: 10px 10px 10px -5px rgba(17,16,16,0.67);
+	margin: 25px;
 }
 
 #addTextWrapper h1 {
@@ -39,9 +47,9 @@ textarea,
 input {
 	font-size: 1.25rem;
 	font-family: Arial, Helvetica, sans-serif;
-	width: 750px;
+	width: 75%;
 	border: 0px solid black;
-	border-radius: 5px;
+	border-radius: 10px;
 	box-shadow: 10px 10px 10px -5px rgba(17,16,16,0.67);
 	margin-bottom: 20px;
 	padding: 10px;
@@ -66,4 +74,5 @@ button {
 	box-shadow: 10px 10px 10px -5px rgba(17,16,16,0.67);
 	padding: 20px;
 	font-size: 1.5rem;
+	margin: 20px;
 }

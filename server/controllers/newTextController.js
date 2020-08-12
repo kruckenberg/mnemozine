@@ -1,3 +1,4 @@
+const db = require('../models/pgModel');
 const markdownParser = require('./markdownParser.js');
 
 const newTextController = {};
@@ -13,7 +14,16 @@ newTextController.parseMarkdown = (req, res, next) => {
 };
 
 newTextController.storeNewText = (req, res, next) => {
-  // send text object (on res.locals) to elephantsql with appropriate sql query
+  const textElements = [ Number(req.cookies.id), res.locals.newText.title, JSON.stringify(res.locals.newText.text) ];
+  const pgQuery = 
+    `INSERT INTO texts (author_id, title, text)
+    VALUES ($1, $2, $3)
+    RETURNING *;`;
+  
+  db.query(pgQuery, textElements)
+    .then(queryResponse => { res.locals.storedText = queryResponse.rows[0]; next(); })
+    .catch(error => { console.log(error); next(error); });
+ 
 };
 
 module.exports = newTextController;

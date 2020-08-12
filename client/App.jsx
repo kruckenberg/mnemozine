@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import GetUser from './components/GetUser.jsx';
 import AddText from './components/AddText.jsx';
 
 import './stylesheets/styles.css';
 
 const App = props => {
 	return (
-		<div>
-			<AddText />
-		</div>
+		<React.Fragment>
+		  <GetUser />
+          <AddText />
+		</React.Fragment>
 	);
 };
 

@@ -2,9 +2,11 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // Import Controllers
 const newTextController = require('./controllers/newTextController.js');
+const userController = require('./controllers/userController.js');
 
 // Create Express server instance
 const app = express();
@@ -13,10 +15,21 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.post('/newText', newTextController.parseMarkdown, (req, res, next) => { 
+app.post('/newText', newTextController.parseMarkdown, newTextController.storeNewText, (req, res, next) => { 
   res.sendStatus(200);
 });
+
+app.post('/login', userController.validateUser, userController.setSession, (req, res, next) => {
+  res.cookie('id', res.locals.user._id);
+  res.status(200).json(res.locals.user);
+});
+
+app.post('/signup', userController.createUser, userController.setSession, (req, res, next) => {
+  res.cookie('id', res.locals.user._id);
+  res.status(200).json(res.locals.newUser);
+})
 
 // Serve main app: build(=dist) folder and html
 app.use('/build', express.static(path.resolve(__dirname, '../build')));

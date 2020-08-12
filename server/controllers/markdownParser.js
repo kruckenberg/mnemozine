@@ -6,8 +6,7 @@ const markdownParser = (text) => {
 
 	for (let block of splitText) {
 		const blockObj = {
-			position: position,
-			cards: [],
+          position: position  
 		};
 
 		block = block.trim();  
