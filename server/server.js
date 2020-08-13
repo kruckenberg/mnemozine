@@ -29,6 +29,10 @@ app.post('/newText', textController.parseMarkdown, textController.storeNewText, 
   res.status(200).json(res.locals.storedText);
 });
 
+app.post('/newCard', textController.addCard, (req, res, next) => { 
+  res.status(200).json(res.locals.newCard)
+});
+
 app.post('/login', userController.validateUser, userController.setSession, (req, res, next) => {
   res.cookie('id', res.locals.user._id);
   res.status(200).json(res.locals.user);

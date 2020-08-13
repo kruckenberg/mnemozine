@@ -37,6 +37,7 @@ module.exports = {
             '/signup': 'http://localhost:3000',
             '/getTexts': 'http://localhost:3000',
             '/getTextContent': 'http://localhost:3000',
+            '/newCard': 'http://localhost:3000',
         },
         historyApiFallback: true,
 	},

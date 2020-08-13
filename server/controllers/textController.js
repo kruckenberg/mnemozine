@@ -47,8 +47,22 @@ textController.getTextContent = (req, res, next) => {
 			const parsedText = JSON.parse(queryResponse.rows[0].text);
 			res.locals.textContent = queryResponse.rows[0];
 			res.locals.textContent.text = parsedText;
-			console.log(res.locals.textContent); 
 			next(); });
 };
+
+textController.addCard = (req, res, next) => {
+	const { text_id, question, answer, position } = req.body;
+	const newCardValues = [text_id, question, answer, position];
+	const pgQuery = 
+	`INSERT INTO cards (text_id, question, answer, position)
+	VALUES ($1, $2, $3, $4)
+	RETURNING *;`;
+
+	db.query(pgQuery, newCardValues)
+		.then((queryResponse) => {
+		res.locals.newCard = queryResponse.rows[0];
+		next();
+	});
+}
 
 module.exports = textController;

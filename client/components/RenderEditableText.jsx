@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
+import AddCard from './AddCard.jsx';
 
 const RenderEditableText = props => {
 	const [body, setBody] = useState([]);
 	const [title, setTitle] = useState('')
+	const [addCard, setAddCard] = useState(false);
+	const [clickedElement, setClickedElement] = useState(null);
 	const { textId } = useParams();
 	
 	useEffect(() => {
@@ -36,7 +39,8 @@ const RenderEditableText = props => {
 	}
 
 	const handleElementClick = (e) => {
-		console.log(e.target.id);
+		setClickedElement(e.target.id);
+		setAddCard(true);
 		document.removeEventListener('click', handleElementClick);
 	}
 
@@ -44,7 +48,10 @@ const RenderEditableText = props => {
 		<article className="mnemoText">
 		  <div className="mnemoTitle">{title}</div>
 			<button id="addCard" onClick={handleAddCardClick}>+ Add Card</button>
-            { body }
+			  { addCard && 
+				  <AddCard textId={textId} position={clickedElement} dismissCard={setAddCard} /> 
+				}
+        { body }
 		</article>
   );
 }

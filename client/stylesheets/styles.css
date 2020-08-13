@@ -241,3 +241,37 @@ button {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.modal {
+	position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.1); /* Black w/ opacity */
+}
+
+#addCardWrapper {
+  margin: 15% auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: rgba(220,220,220,0.95);
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px -5px rgba(17,16,16,0.67);
+}
+
+#addCardWrapper textarea {
+	height: 100px;
+}
+
+#addCardWrapper h1 {
+	align-self: flex-start;
+}
