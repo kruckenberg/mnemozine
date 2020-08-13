@@ -33,6 +33,22 @@ textController.getTexts = (req, res, next) => {
 	
 	db.query(pgQuery)
 	  .then(queryResponse => {res.locals.textList = queryResponse.rows; next(); });
-}
+};
+
+textController.getTextContent = (req, res, next) => {
+	const pgQuery = 
+		`SELECT *
+		FROM texts
+		WHERE _id=$1;`
+	
+	
+	db.query(pgQuery, [req.params.textId])
+	  .then(queryResponse => { 
+			const parsedText = JSON.parse(queryResponse.rows[0].text);
+			res.locals.textContent = queryResponse.rows[0];
+			res.locals.textContent.text = parsedText;
+			console.log(res.locals.textContent); 
+			next(); });
+};
 
 module.exports = textController;

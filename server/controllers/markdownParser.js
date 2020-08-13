@@ -24,10 +24,10 @@ const markdownParser = (text) => {
 		} else {
 			blockObj.type = 'paragraph';
 			let content = block.trim();
-			while(content.indexOf('**') > 0) {
+			while(content.indexOf('**') >= 0) {
 				content = content.replace(/\*{2}/, '<strong>').replace(/\*{2}/, '</strong>');
 			}
-			while(content.indexOf('__') > 0) {
+			while(content.indexOf('__') >= 0) {
 				content = content.replace(/_{2}/, '<em>').replace(/_{2}/, '</em>')
 			}
 			blockObj.content = content;

@@ -29,22 +29,9 @@ const DisplayTexts = props => {
 		if (e.target.id === 'createNew') {
 			history.push('/addText');
 		} else {
-			history.push(`/mnemo/${e.target.id}`);
+			history.push(`/mnemos/${e.target.id}`);
 		}
 	}
-
-	// const textList = texts.map((text => {
-	// 	let element;
-	// 	if (text.type === 'heading-1') {
-	// 		element = <h1 id="{`heading-${text.position}`}">text.content</h1>
-	// 	} else if (text.type === 'heading-2') {
-	// 		element = <h2 id="{`heading-${text.position}`}">text.content</h2>
-	// 	} else if (text.type === 'heading-3') {
-	// 		element = <h3 id="{`heading-${text.position}`}">text.content</h3>
-	// 	} else if (text.type === 'paragraph') {
-	// 		element = <p id="{`heading-${text.position}`}">text.content</p>
-	// 	}
-	// }))
 
   return (
 		<React.Fragment>

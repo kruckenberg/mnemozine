@@ -19,10 +19,14 @@ app.use(cookieParser());
 
 app.get('/getTexts', textController.getTexts, (req, res, next) => {
   res.json(res.locals.textList);
-})
+});
+
+app.get('/getTextContent/:textId', textController.getTextContent, (req, res, next) => {
+  res.json(res.locals.textContent);
+});
 
 app.post('/newText', textController.parseMarkdown, textController.storeNewText, (req, res, next) => { 
-  res.sendStatus(200);
+  res.status(200).json(res.locals.storedText);
 });
 
 app.post('/login', userController.validateUser, userController.setSession, (req, res, next) => {

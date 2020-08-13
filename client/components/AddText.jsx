@@ -19,10 +19,15 @@ const AddText = props => {
         body: JSON.stringify(text),
     };
 
-    fetch('http://localhost:8080/newText', postOptions)
-    setTitle('');
-		setBody('');
-		history.push('/mnemos');
+		fetch('http://localhost:8080/newText', postOptions)
+			.then(response => {
+				return response.json()
+			})
+		  .then((response) => {
+				setTitle('');
+				setBody('');
+				history.push(`/mnemos/edit/${response._id}`);
+			});
   }
 
   return (
