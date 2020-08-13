@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 // Import Controllers
-const newTextController = require('./controllers/newTextController.js');
+const textController = require('./controllers/textController.js');
 const userController = require('./controllers/userController.js');
 
 // Create Express server instance
@@ -17,7 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.post('/newText', newTextController.parseMarkdown, newTextController.storeNewText, (req, res, next) => { 
+app.get('/getTexts', textController.getTexts, (req, res, next) => {
+  res.json(res.locals.textList);
+})
+
+app.post('/newText', textController.parseMarkdown, textController.storeNewText, (req, res, next) => { 
   res.sendStatus(200);
 });
 

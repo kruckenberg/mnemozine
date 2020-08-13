@@ -34,8 +34,10 @@ module.exports = {
 		proxy: {
 			'/newText': 'http://localhost:3000',
 			'/login': 'http://localhost:3000',
-			'/signup': 'http://localhost:3000',
-		}
+            '/signup': 'http://localhost:3000',
+            '/getTexts': 'http://localhost:3000',
+        },
+        historyApiFallback: true,
 	},
 	resolve: {
     extensions: ['.js', '.jsx'],

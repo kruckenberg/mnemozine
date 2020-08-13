@@ -1,9 +1,9 @@
 const db = require('../models/pgModel');
 const markdownParser = require('./markdownParser.js');
 
-const newTextController = {};
+const textController = {};
 
-newTextController.parseMarkdown = (req, res, next) => {
+textController.parseMarkdown = (req, res, next) => {
   // TODO: Add author when login complete
   const { title, body } = req.body;
   const text = markdownParser(body);
@@ -13,7 +13,7 @@ newTextController.parseMarkdown = (req, res, next) => {
   next();
 };
 
-newTextController.storeNewText = (req, res, next) => {
+textController.storeNewText = (req, res, next) => {
   const textElements = [ Number(req.cookies.id), res.locals.newText.title, JSON.stringify(res.locals.newText.text) ];
   const pgQuery = 
     `INSERT INTO texts (author_id, title, text)
@@ -26,4 +26,13 @@ newTextController.storeNewText = (req, res, next) => {
  
 };
 
-module.exports = newTextController;
+textController.getTexts = (req, res, next) => {
+	const pgQuery = 
+		`SELECT title, _id
+		FROM texts;`
+	
+	db.query(pgQuery)
+	  .then(queryResponse => {res.locals.textList = queryResponse.rows; next(); });
+}
+
+module.exports = textController;
