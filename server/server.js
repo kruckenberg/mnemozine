@@ -25,6 +25,10 @@ app.get('/getTextContent/:textId', textController.getTextContent, (req, res, nex
   res.json(res.locals.textContent);
 });
 
+app.get('/getCards/:textId', textController.getCards, (req, res, next) => {
+  res.json(res.locals.cards);
+});
+
 app.post('/newText', textController.parseMarkdown, textController.storeNewText, (req, res, next) => { 
   res.status(200).json(res.locals.storedText);
 });

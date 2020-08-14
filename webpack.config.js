@@ -38,6 +38,7 @@ module.exports = {
             '/getTexts': 'http://localhost:3000',
             '/getTextContent': 'http://localhost:3000',
             '/newCard': 'http://localhost:3000',
+            '/getCards': 'http://localhost:3000',
         },
         historyApiFallback: true,
 	},

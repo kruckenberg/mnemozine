@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import AddCard from './AddCard.jsx';
 
@@ -9,6 +9,7 @@ const RenderEditableText = props => {
 	const [addCard, setAddCard] = useState(false);
 	const [clickedElement, setClickedElement] = useState(null);
 	const { textId } = useParams();
+	const history = useHistory();
 	
 	useEffect(() => {
 		fetch(`/getTextContent/${textId}`)
@@ -47,7 +48,10 @@ const RenderEditableText = props => {
   return (
 		<article className="mnemoText">
 		  <div className="mnemoTitle">{title}</div>
-			<button id="addCard" onClick={handleAddCardClick}>+ Add Card</button>
+			<div className="buttonWrapper">
+				<button id="addCard" onClick={handleAddCardClick}>+ Add Card</button>
+				<button id="finishedAddingCards" onClick={() => history.push('/mnemos')}>Finished</button>
+			</div>
 			  { addCard && 
 				  <AddCard textId={textId} position={clickedElement} dismissCard={setAddCard} /> 
 				}

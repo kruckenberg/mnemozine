@@ -4,10 +4,29 @@ import parse from 'html-react-parser';
 
 const RenderText = props => {
 	const [body, setBody] = useState([]);
-	const [title, setTitle] = useState('')
+	const [title, setTitle] = useState('');
+	const [cards, setCards] = useState([]);
 	const { textId } = useParams();
 	
 	useEffect(() => {
+		fetch(`/getCards/${textId}`)
+			.then(queryResults => queryResults.json())
+			.then(queryResults => {
+				const cardObj = queryResults.reduce((acc, card) => {
+					if(!acc[card.position]) {
+						acc[card.position] = { count: 1, cards: [{ question: card.question, answer: card.answer }] };
+						return acc;
+					} else {
+						acc[card.position].count++;
+						acc[card.position].cards.push({ question: card.question, answer: card.answer });
+					}
+				}, 
+				{});
+				
+				setCards(cardObj);
+				
+			});
+		
 		fetch(`/getTextContent/${textId}`)
 			.then(queryResults => queryResults.json())
 		  .then((queryResults) => {
@@ -29,7 +48,7 @@ const RenderText = props => {
 				setBody(bodyElements);
 				setTitle(queryResults.title);
 			});
-	}, [setBody, setTitle]);
+	}, [setBody, setTitle, setCards]);
 
   return (
 		<article className="mnemoText">

@@ -42,7 +42,7 @@ textController.getTextContent = (req, res, next) => {
 		WHERE _id=$1;`
 	
 	
-	db.query(pgQuery, [req.params.textId])
+	db.query(pgQuery, [ req.params.textId ])
 	  .then(queryResponse => { 
 			const parsedText = JSON.parse(queryResponse.rows[0].text);
 			res.locals.textContent = queryResponse.rows[0];
@@ -63,6 +63,20 @@ textController.addCard = (req, res, next) => {
 		res.locals.newCard = queryResponse.rows[0];
 		next();
 	});
+};
+
+textController.getCards = (req, res, next) => {
+	const pgQuery = 
+	 `SELECT *
+	 FROM cards
+	 WHERE text_id=$1;`;
+
+	 db.query(pgQuery, [ req.params.textId ])
+	   .then(queryResponse => {
+			 console.log(queryResponse.rows);
+			 res.locals.cards = queryResponse.rows;
+			 next();
+		 });
 }
 
 module.exports = textController;
